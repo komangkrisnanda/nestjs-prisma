@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { identity } from 'rxjs';
 import { UserService } from './user.service';
 
 @Controller('user')
@@ -14,8 +15,27 @@ export class UserController {
         return await this.userService.findAll();
     }
 
+    /**
+     * Store user
+     * @param body 
+     * @returns 
+     */
+
     @Post()
     async storeUser(@Body() body){
         return await this.userService.storeData(body);
+    }
+
+    /**
+     * Update user
+     * @param id 
+     * @param body 
+     * @returns 
+     */
+
+    @UsePipes(ValidationPipe)
+    @Patch('/:id')
+    async updateUser(@Param(`id`, ParseIntPipe) id, @Body() body){
+        return await this.userService.updateData(id, body);        
     }
 }

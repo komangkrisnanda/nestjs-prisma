@@ -23,4 +23,20 @@ export class UserService {
             data: data
         });
     }
+
+    /**
+     * Update user
+     * @param id 
+     * @param data 
+     * @returns 
+     */
+
+    async updateData(id: number, data: any){
+        return await this.dbService.user.update({
+            data,
+            where: {
+                id: id
+            }
+        })
+    }
 }
