@@ -39,4 +39,17 @@ export class UserService {
             }
         })
     }
+
+    /**
+     * Delete user
+     * @param id 
+     * @returns 
+     */
+    async deleteData(id: number){
+        return await this.dbService.user.delete({
+            where:{
+                id: id
+            }
+        });
+    }
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { identity } from 'rxjs';
 import { UserService } from './user.service';
 
@@ -37,5 +37,10 @@ export class UserController {
     @Patch('/:id')
     async updateUser(@Param(`id`, ParseIntPipe) id, @Body() body){
         return await this.userService.updateData(id, body);        
+    }
+
+    @Delete('/:id')
+    async deleteUser(@Param(`id`, ParseIntPipe) id, @Body() body){
+        return await this.userService.deleteData(id);
     }
 }
