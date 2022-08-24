@@ -1,5 +1,6 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { identity } from 'rxjs';
+import { CreateUserDto } from './dto/create-user.dto';
 import { UserService } from './user.service';
 
 @Controller('user')
@@ -21,8 +22,9 @@ export class UserController {
      * @returns 
      */
 
+    @UsePipes(ValidationPipe)
     @Post()
-    async storeUser(@Body() body){
+    async storeUser(@Body() body: CreateUserDto){
         return await this.userService.storeData(body);
     }
 
